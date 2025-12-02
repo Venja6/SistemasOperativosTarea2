@@ -1,1 +1,61 @@
 ###
+
+Tarea 2 – Barrera Reutilizable y Simulador de Memoria Virtual
+Sistemas Operativos – 2025
+Integrantes: Matías Concha Aguilera, Benjamín Díaz, Roberto Cruz Pinto
+
+Parte 1: Barrera Reutilizable
+
+La Parte 1 implementa un monitor de barrera reutilizable usando mutex y variables de condición.
+Cada hebra trabaja, llega a la barrera y espera.
+La última hebra de cada etapa hace un broadcast, avanza la etapa y reinicia el contador.
+
+Compilación (dentro de Parte1_Barrera):
+gcc main.c monitor_barrera.c -o barrera -pthread
+
+Ejecución:
+./barrera
+
+El programa solicitará:
+Número de hebras
+Número de etapas a ejecutar
+
+
+Parte 2: Simulador de Memoria Virtual con algoritmo Clock
+
+La Parte 2 implementa un simulador secuencial con paginación simple y reemplazo Clock.
+El simulador procesa un archivo donde cada línea contiene una dirección virtual (decimal o hexadecimal).
+
+Formato general del comando:
+./sim Nmarcos PageSize [--verbose] archivo_traza
+
+Descripción de los parámetros:
+Nmarcos → cantidad de marcos físicos disponibles
+PageSize → tamaño del marco (debe ser potencia de 2)
+--verbose → opcional; muestra el detalle de cada traducción
+archivo_traza → archivo con una DV por línea
+
+Ejemplos de ejecución:
+
+Compilación (dentro de Parte2_Simulador):
+make
+
+Simulación simple (sin verbose):
+./sim 8 4096 trace2.txt
+
+Simulación detallada con verbose:
+./sim 16 8 --verbose trace1.txt
+
+
+Formato del archivo de trazas:
+Una dirección virtual por línea, por ejemplo:
+100
+200
+300
+0x1A2B
+
+Salida del programa:
+DV, npv, offset, HIT/FALLO, marco y DF (si se activa verbose)
+Total de referencias
+Total de fallos de página
+Tasa de fallos
